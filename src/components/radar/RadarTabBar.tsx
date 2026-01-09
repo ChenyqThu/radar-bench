@@ -4,7 +4,7 @@
  * 支持拖拽排序
  */
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useRadarStore } from '@/store/radarStore'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
@@ -359,3 +359,6 @@ export function RadarTabBar() {
     </>
   )
 }
+
+// 使用 React.memo 优化性能
+export default React.memo(RadarTabBar)

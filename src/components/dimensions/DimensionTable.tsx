@@ -4,7 +4,7 @@
  * 支持拖拽排序
  */
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useRadarStore } from '@/store/radarStore'
 import { useWeightValidation } from '@/hooks/useWeightValidation'
 import { Card } from '@/components/ui/card'
@@ -17,6 +17,16 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { Alert, AlertDescription } from '@/components/ui/alert'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog'
 import { DimensionRow } from './DimensionRow'
 import { Plus, AlertCircle, CheckCircle } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
@@ -25,9 +35,17 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useDragAndDrop } from '@/hooks/useDragAndDrop'
 
 /**
+ * 维度管理表格组件 Props
+ */
+export interface DimensionTableProps {
+  /** 查看子维度雷达图回调 */
+  onViewSubRadar?: (dimensionId: string) => void
+}
+
+/**
  * 维度管理表格组件
  */
-export function DimensionTable() {
+export function DimensionTable({ onViewSubRadar }: DimensionTableProps = {}) {
   const { t } = useTranslation()
   const {
     getActiveChart,
@@ -44,6 +62,10 @@ export function DimensionTable() {
   } = useRadarStore()
   const activeChart = getActiveChart()
   const [expandedIds, setExpandedIds] = useState<Set<string>>(new Set())
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
+  const [dimensionToDelete, setDimensionToDelete] = useState<string | null>(
+    null
+  )
 
   // 权重验证 (使用 Hook) - 必须在 early return 之前调用
   const weightValidation = useWeightValidation(activeChart?.dimensions || [])
@@ -121,7 +143,16 @@ export function DimensionTable() {
   const handleDeleteDimension = (dimensionId: string) => {
     // 至少保留一个维度
     if (activeChart.dimensions.length > 1) {
-      deleteDimension(activeChart.id, dimensionId)
+      setDimensionToDelete(dimensionId)
+      setDeleteDialogOpen(true)
+    }
+  }
+
+  const confirmDelete = () => {
+    if (dimensionToDelete && activeChart) {
+      deleteDimension(activeChart.id, dimensionToDelete)
+      setDimensionToDelete(null)
+      setDeleteDialogOpen(false)
     }
   }
 
@@ -279,6 +310,7 @@ export function DimensionTable() {
                       isExpanded={expandedIds.has(dimension.id)}
                       draggable
                       onToggleExpand={() => handleToggleExpand(dimension.id)}
+                      onViewSubRadar={onViewSubRadar}
                       onUpdate={handleUpdateDimension}
                       onUpdateScore={handleUpdateScore}
                       onDelete={handleDeleteDimension}
@@ -295,6 +327,30 @@ export function DimensionTable() {
           </div>
         </DndContext>
       )}
+
+      {/* 删除确认对话框 */}
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t('dimensions.deleteTitle')}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {t('dimensions.deleteDescription')}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t('common.cancel')}</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={confirmDelete}
+              className="bg-destructive"
+            >
+              {t('common.delete')}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </Card>
   )
 }
+
+// 使用 React.memo 优化性能
+export default React.memo(DimensionTable)

@@ -35,7 +35,13 @@ export function SortableVendorItem(props: SortableVendorItemProps) {
   }
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      tabIndex={-1}
+    >
       <VendorItem {...props} draggable />
     </div>
   )

@@ -18,7 +18,9 @@
     "create": "创建",
     "creating": "创建中...",
     "actions": "操作",
-    "more": "更多"
+    "more": "更多",
+    "expand": "展开",
+    "collapse": "收起"
   },
   "theme": {
     "light": "浅色模式",
@@ -89,6 +91,8 @@
     "empty": "暂无竞品。请添加第一个竞品开始使用。",
     "noActiveChart": "无激活的雷达图",
     "namePlaceholder": "请输入竞品名称",
+    "deleteTitle": "删除竞品",
+    "deleteDescription": "确定要删除这个竞品吗？相关的所有分数数据也将被删除。此操作无法撤销。",
     "symbols": {
       "circle": "圆形",
       "rect": "方形",
@@ -107,7 +111,10 @@
     "name": "维度名称",
     "weight": "权重 (%)",
     "autoCalculated": "分数由子维度自动计算",
-    "addSubDimension": "添加子维度"
+    "addSubDimension": "添加子维度",
+    "viewSubRadar": "查看子维度雷达图",
+    "deleteTitle": "删除维度",
+    "deleteDescription": "确定要删除这个维度吗？相关的所有分数数据和子维度也将被删除。此操作无法撤销。"
   },
   "validation": {
     "weightValid": "✓ 权重总和为 100%",

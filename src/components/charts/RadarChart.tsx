@@ -45,7 +45,7 @@ export const RadarChart: React.FC<RadarChartProps> = ({
         dataIndex < activeChart.dimensions.length
       ) {
         const dimension = activeChart.dimensions[dataIndex]
-        onDimensionClick(dimension.id, dimension.name)
+        onDimensionClick(dimension.id)
       }
     }
   }

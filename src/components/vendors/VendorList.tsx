@@ -3,7 +3,7 @@
  * 支持拖拽排序
  */
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import type { Vendor } from '@/types'
 import { VendorItem } from './VendorItem'
 import { SortableVendorItem } from './SortableVendorItem'
@@ -100,3 +100,6 @@ export function VendorList({
     </DndContext>
   )
 }
+
+// 使用 React.memo 优化性能
+export default React.memo(VendorList)

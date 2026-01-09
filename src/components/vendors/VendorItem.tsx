@@ -3,7 +3,7 @@
  * 支持内联编辑、颜色选择、标记类型选择
  */
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import type { Vendor, SymbolType } from '@/types'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -123,6 +123,7 @@ export function VendorItem({
 
   return (
     <div
+      data-testid="vendor-item"
       className={cn(
         'group flex items-center gap-3 rounded-lg border bg-card p-3 transition-all',
         'hover:bg-muted/50'
@@ -130,7 +131,7 @@ export function VendorItem({
       onClick={onEdit}
     >
       {draggable && (
-        <GripVertical className="h-5 w-5 cursor-grab text-muted-foreground active:cursor-grabbing" />
+        <GripVertical className="h-5 w-5 cursor-grab opacity-0 text-muted-foreground transition-opacity group-hover:opacity-100 active:cursor-grabbing" />
       )}
       <div
         className="h-4 w-4 flex-shrink-0 rounded-full border"
@@ -144,6 +145,7 @@ export function VendorItem({
         size="icon"
         variant="ghost"
         className="opacity-0 transition-opacity group-hover:opacity-100"
+        aria-label={t('common.delete')}
         onClick={(e) => {
           e.stopPropagation()
           onDelete()
@@ -154,3 +156,6 @@ export function VendorItem({
     </div>
   )
 }
+
+// 使用 React.memo 优化性能
+export default React.memo(VendorItem)

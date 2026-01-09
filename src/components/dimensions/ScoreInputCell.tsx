@@ -4,7 +4,7 @@
  */
 
 /* eslint-disable react-hooks/set-state-in-effect */
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 import { isScoreValid } from '@/lib/validators'
@@ -105,6 +105,7 @@ export function ScoreInputCell({
 
   return (
     <Input
+      data-testid="score-input"
       type="number"
       min="0"
       max="10"
@@ -125,3 +126,6 @@ export function ScoreInputCell({
     />
   )
 }
+
+// 使用 React.memo 优化性能
+export default React.memo(ScoreInputCell)

@@ -3,7 +3,7 @@
  * 显示竞品的加权总分和实时排名
  */
 
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { useRadarStore } from '@/store/radarStore'
 import { Card } from '@/components/ui/card'
 import { RankingList } from './RankingList'
@@ -51,3 +51,6 @@ export function ScoreBoard() {
     </Card>
   )
 }
+
+// 使用 React.memo 优化性能
+export default React.memo(ScoreBoard)

@@ -3,7 +3,7 @@
  * 显示单个维度的信息和分数输入，支持子维度展开和拖拽排序
  */
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import type { Dimension, Vendor } from '@/types'
 import { TableCell, TableRow } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
@@ -28,6 +28,7 @@ import {
   AlertCircle,
   CheckCircle,
   Calculator,
+  TrendingUp,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { shouldAutoCalculate } from '@/lib/calculations'
@@ -51,6 +52,8 @@ export interface DimensionRowProps {
   draggable?: boolean
   /** 切换展开/收起回调 */
   onToggleExpand?: () => void
+  /** 查看子维度雷达图回调 */
+  onViewSubRadar?: (dimensionId: string) => void
   /** 更新维度回调 */
   onUpdate: (dimensionId: string, updates: Partial<Dimension>) => void
   /** 更新分数回调 */
@@ -90,6 +93,7 @@ export function DimensionRow({
   isExpanded = false,
   draggable = false,
   onToggleExpand,
+  onViewSubRadar,
   onUpdate,
   onUpdateScore,
   onDelete,
@@ -198,6 +202,7 @@ export function DimensionRow({
   return (
     <>
       <TableRow
+        data-testid="dimension-row"
         ref={setNodeRef}
         style={style}
         className={cn('group hover:bg-muted/50', isDragging && 'opacity-50')}
@@ -208,7 +213,8 @@ export function DimensionRow({
             <div
               {...attributes}
               {...listeners}
-              className="cursor-grab active:cursor-grabbing"
+              tabIndex={-1}
+              className="cursor-grab opacity-0 transition-opacity group-hover:opacity-100 active:cursor-grabbing"
             >
               <GripVertical className="h-5 w-5 text-muted-foreground" />
             </div>
@@ -224,6 +230,9 @@ export function DimensionRow({
                 size="icon"
                 className="h-6 w-6 flex-shrink-0"
                 onClick={onToggleExpand}
+                aria-label={
+                  isExpanded ? t('common.collapse') : t('common.expand')
+                }
               >
                 {isExpanded ? (
                   <ChevronDown className="h-4 w-4" />
@@ -346,15 +355,55 @@ export function DimensionRow({
         ))}
 
         {/* 操作 */}
-        <TableCell className="w-24">
-          <Button
-            size="icon"
-            variant="ghost"
-            className="opacity-0 transition-opacity group-hover:opacity-100"
-            onClick={() => onDelete(dimension.id)}
-          >
-            <Trash2 className="h-4 w-4 text-destructive" />
-          </Button>
+        <TableCell className="w-32">
+          <div className="flex items-center gap-1 opacity-0 transition-opacity group-hover:opacity-100">
+            {onAddSubDimension && (
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      tabIndex={-1}
+                      onClick={() => onAddSubDimension(dimension.id)}
+                    >
+                      <Plus className="h-4 w-4 text-green-600" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{t('dimensions.addSubDimension')}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            )}
+            {hasSubDimensions && onViewSubRadar && (
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      tabIndex={-1}
+                      onClick={() => onViewSubRadar(dimension.id)}
+                    >
+                      <TrendingUp className="h-4 w-4 text-blue-600" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{t('dimensions.viewSubRadar')}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            )}
+            <Button
+              size="icon"
+              variant="ghost"
+              tabIndex={-1}
+              onClick={() => onDelete(dimension.id)}
+            >
+              <Trash2 className="h-4 w-4 text-destructive" />
+            </Button>
+          </div>
         </TableCell>
       </TableRow>
 
@@ -446,3 +495,6 @@ export function DimensionRow({
     </>
   )
 }
+
+// 使用 React.memo 优化性能
+export default React.memo(DimensionRow)

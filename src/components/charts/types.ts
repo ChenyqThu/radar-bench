@@ -78,5 +78,5 @@ export interface RadarChartProps {
   height?: string | number
   width?: string | number
   loading?: boolean
-  onDimensionClick?: (dimensionId: string, dimensionName: string) => void
+  onDimensionClick?: (dimensionId: string) => void
 }

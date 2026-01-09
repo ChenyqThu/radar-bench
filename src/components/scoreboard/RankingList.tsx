@@ -3,6 +3,8 @@
  * 显示竞品的排名、分数、颜色标识
  */
 
+import React from 'react'
+
 import type { RankingItem } from '@/lib/calculations'
 import { Badge } from '@/components/ui/badge'
 import { Trophy } from 'lucide-react'
@@ -79,3 +81,6 @@ export function RankingList({ rankings }: RankingListProps) {
     </div>
   )
 }
+
+// 使用 React.memo 优化性能
+export default React.memo(RankingList)

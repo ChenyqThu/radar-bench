@@ -4,7 +4,7 @@
  * 支持拖拽排序
  */
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import type { SubDimension, Vendor } from '@/types'
 import { TableCell, TableRow } from '@/components/ui/table'
 import { Button } from '@/components/ui/button'
@@ -99,10 +99,11 @@ export function SubDimensionRow({
 
   return (
     <TableRow
+      data-testid="sub-dimension-row"
       ref={setNodeRef}
       style={style}
       className={cn(
-        'bg-muted/30 hover:bg-muted/50',
+        'group bg-muted/30 hover:bg-muted/50',
         isDragging && 'opacity-50'
       )}
     >
@@ -112,7 +113,8 @@ export function SubDimensionRow({
           <div
             {...attributes}
             {...listeners}
-            className="cursor-grab active:cursor-grabbing"
+            tabIndex={-1}
+            className="cursor-grab opacity-0 transition-opacity group-hover:opacity-100 active:cursor-grabbing"
           >
             <GripVertical className="h-5 w-5 text-muted-foreground" />
           </div>
@@ -226,6 +228,7 @@ export function SubDimensionRow({
         <Button
           size="icon"
           variant="ghost"
+          tabIndex={-1}
           className="opacity-0 transition-opacity group-hover:opacity-100"
           onClick={() => onDelete(subDimension.id)}
         >
@@ -235,3 +238,6 @@ export function SubDimensionRow({
     </TableRow>
   )
 }
+
+// 使用 React.memo 优化性能
+export default React.memo(SubDimensionRow)
