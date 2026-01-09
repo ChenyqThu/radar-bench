@@ -1,9 +1,17 @@
+import { useEffect } from 'react'
 import { ThemeProvider } from 'next-themes'
 import { useTranslation } from 'react-i18next'
 import { AppLayout } from '@/components/layout/AppLayout'
+import { useRadarStore } from '@/store'
 
 function App() {
   const { t } = useTranslation()
+  const { loadFromStorage, radarCharts, isLoading } = useRadarStore()
+
+  // 应用启动时加载数据
+  useEffect(() => {
+    loadFromStorage()
+  }, [loadFromStorage])
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
@@ -19,12 +27,16 @@ function App() {
               </p>
             </div>
             <div className="pt-8">
-              <p className="text-muted-foreground">
-                v0.1.0 - 项目基础设施已完成
-              </p>
-              <p className="text-sm text-muted-foreground mt-2">
-                开始构建您的竞品对比工具...
-              </p>
+              <p className="text-muted-foreground">v0.2.0 - 核心数据层已完成</p>
+              {isLoading ? (
+                <p className="text-sm text-muted-foreground mt-2">
+                  加载数据中...
+                </p>
+              ) : (
+                <p className="text-sm text-muted-foreground mt-2">
+                  已加载 {radarCharts.length} 个雷达图
+                </p>
+              )}
             </div>
           </div>
         </div>
