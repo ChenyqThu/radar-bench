@@ -34,16 +34,16 @@
 
 ---
 
-## Version 0.2.0 - Core Data Layer - 🔴 Not Started
+## Version 0.2.0 - Core Data Layer - 🟢 Completed
 核心数据层和状态管理，建立应用的数据基础。
 
 | ID  | Feature                 | Description                              | Priority | Status |
 |-----|-------------------------|------------------------------------------|----------|--------|
-| V02-1 | 数据模型设计 | 定义 TypeScript 接口（RadarChart、Vendor、Dimension 等） | 🔥 High | 🔴 Not Started |
-| V02-2 | 数据验证 Schema | 使用 Zod 定义数据验证规则 | 🔥 High | 🔴 Not Started |
-| V02-3 | Zustand Store | 创建全局状态管理 Store | 🔥 High | 🔴 Not Started |
-| V02-4 | IndexedDB 存储服务 | 使用 Dexie.js 实现本地持久化 | 🔥 High | 🔴 Not Started |
-| V02-5 | 自动保存机制 | 实现数据自动保存和恢复 | 📌 Medium | 🔴 Not Started |
+| V02-1 | 数据模型设计 | 定义 TypeScript 接口（RadarChart、Vendor、Dimension 等） | 🔥 High | 🟢 Completed |
+| V02-2 | 数据验证 Schema | 使用 Zod 定义数据验证规则 | 🔥 High | 🟢 Completed |
+| V02-3 | Zustand Store | 创建全局状态管理 Store | 🔥 High | 🟢 Completed |
+| V02-4 | IndexedDB 存储服务 | 使用 Dexie.js 实现本地持久化 | 🔥 High | 🟢 Completed |
+| V02-5 | 自动保存机制 | 实现数据自动保存和恢复 | 📌 Medium | 🟢 Completed |
 
 ---
 
