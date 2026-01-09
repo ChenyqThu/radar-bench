@@ -1,11 +1,8 @@
-import { useState } from 'react'
 import { ThemeProvider } from 'next-themes'
 import { useTranslation } from 'react-i18next'
-import { Button } from '@/components/ui/button'
 import { AppLayout } from '@/components/layout/AppLayout'
 
 function App() {
-  const [count, setCount] = useState(0)
   const { t } = useTranslation()
 
   return (
@@ -21,19 +18,13 @@ function App() {
                 {t('app.subtitle')}
               </p>
             </div>
-            <div className="flex flex-col items-center gap-4 pt-8">
-              <Button onClick={() => setCount((count) => count + 1)} size="lg">
-                count is {count}
-              </Button>
-              <div className="space-y-2 text-center">
-                <p className="text-muted-foreground font-medium">
-                  ✅ Phase 1-5 完成 - 项目基础设施已搭建
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  Vite + React + TypeScript + Tailwind + Shadcn + ESLint + i18n
-                  + Theme + Layout
-                </p>
-              </div>
+            <div className="pt-8">
+              <p className="text-muted-foreground">
+                v0.1.0 - 项目基础设施已完成
+              </p>
+              <p className="text-sm text-muted-foreground mt-2">
+                开始构建您的竞品对比工具...
+              </p>
             </div>
           </div>
         </div>
