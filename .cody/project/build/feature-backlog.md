@@ -20,17 +20,17 @@
 
 ---
 
-## Version 0.1.0 - Project Setup - 🔴 Not Started
+## Version 0.1.0 - Project Setup - 🟢 Completed
 项目基础设施搭建，创建开发环境和基础框架。
 
 | ID  | Feature                 | Description                              | Priority | Status |
 |-----|-------------------------|------------------------------------------|----------|--------|
-| V01-1 | 项目初始化 | 使用 Vite 创建 React + TypeScript 项目 | 🔥 High | 🔴 Not Started |
-| V01-2 | UI 框架集成 | 配置 Tailwind CSS 和 Shadcn/ui | 🔥 High | 🔴 Not Started |
-| V01-3 | 代码规范配置 | 设置 ESLint、Prettier、Git hooks | 📌 Medium | 🔴 Not Started |
-| V01-4 | Vercel 部署配置 | 配置 Vercel 部署和 CI/CD | 🔥 High | 🔴 Not Started |
-| V01-5 | 国际化初始化 | 配置 i18n（中英文） | 🔥 High | 🔴 Not Started |
-| V01-6 | 主题切换功能 | 实现深色/浅色模式切换 | 📌 Medium | 🔴 Not Started |
+| V01-1 | 项目初始化 | 使用 Vite 创建 React + TypeScript 项目 | 🔥 High | 🟢 Completed |
+| V01-2 | UI 框架集成 | 配置 Tailwind CSS 和 Shadcn/ui | 🔥 High | 🟢 Completed |
+| V01-3 | 代码规范配置 | 设置 ESLint、Prettier、Git hooks | 📌 Medium | 🟢 Completed |
+| V01-4 | Vercel 部署配置 | 配置 Vercel 部署和 CI/CD | 🔥 High | 🟢 Completed |
+| V01-5 | 国际化初始化 | 配置 i18n（中英文） | 🔥 High | 🟢 Completed |
+| V01-6 | 主题切换功能 | 实现深色/浅色模式切换 | 📌 Medium | 🟢 Completed |
 
 ---
 
