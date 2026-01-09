@@ -14,6 +14,8 @@ export interface RadarChart {
   id: string
   /** 雷达图名称 */
   name: string
+  /** 排序序号 */
+  order: number
   /** 创建时间 */
   createdAt: Date
   /** 更新时间 */
@@ -38,6 +40,7 @@ export type CreateRadarChartInput = {
  */
 export type UpdateRadarChartInput = Partial<{
   name: string
+  order: number
   vendors: Vendor[]
   dimensions: Dimension[]
 }>

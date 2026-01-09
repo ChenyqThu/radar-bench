@@ -29,6 +29,12 @@ export interface RadarChartActions {
   setActiveChart: (id: string | null) => void
   /** 获取当前激活的雷达图 */
   getActiveChart: () => RadarChart | null
+  /** 重新排序雷达图 */
+  reorderCharts: (chartIds: string[]) => void
+  /** 重命名雷达图 */
+  renameRadarChart: (id: string, name: string) => void
+  /** 复制雷达图 */
+  duplicateRadarChart: (id: string) => string | null
 }
 
 /**

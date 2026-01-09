@@ -42,9 +42,16 @@ export const useRadarStore = create<RadarStore>()(
       addRadarChart: (input: CreateRadarChartInput) => {
         const id = nanoid()
         const now = new Date()
+        const state = get()
+        // 新雷达图的 order 为当前最大 order + 1
+        const maxOrder =
+          state.radarCharts.length > 0
+            ? Math.max(...state.radarCharts.map((c) => c.order))
+            : -1
         const newChart: RadarChart = {
           id,
           name: input.name || DEFAULT_RADAR_CHART_NAME,
+          order: maxOrder + 1,
           createdAt: now,
           updatedAt: now,
           vendors: input.vendors || [],
@@ -63,6 +70,7 @@ export const useRadarStore = create<RadarStore>()(
           const chart = state.radarCharts.find((c: RadarChart) => c.id === id)
           if (chart) {
             if (updates.name !== undefined) chart.name = updates.name
+            if (updates.order !== undefined) chart.order = updates.order
             if (updates.vendors !== undefined) chart.vendors = updates.vendors
             if (updates.dimensions !== undefined)
               chart.dimensions = updates.dimensions
@@ -96,6 +104,100 @@ export const useRadarStore = create<RadarStore>()(
             (c: RadarChart) => c.id === state.activeChartId
           ) || null
         )
+      },
+
+      reorderCharts: (chartIds: string[]) => {
+        set((state) => {
+          chartIds.forEach((id, index) => {
+            const chart = state.radarCharts.find((c: RadarChart) => c.id === id)
+            if (chart) {
+              chart.order = index
+            }
+          })
+          // 按 order 排序
+          state.radarCharts.sort(
+            (a: RadarChart, b: RadarChart) => a.order - b.order
+          )
+        })
+      },
+
+      renameRadarChart: (id: string, name: string) => {
+        set((state) => {
+          const chart = state.radarCharts.find((c: RadarChart) => c.id === id)
+          if (chart) {
+            chart.name = name
+            chart.updatedAt = new Date()
+          }
+        })
+      },
+
+      duplicateRadarChart: (id: string) => {
+        const state = get()
+        const sourceChart = state.radarCharts.find(
+          (c: RadarChart) => c.id === id
+        )
+        if (!sourceChart) return null
+
+        const newId = nanoid()
+        const now = new Date()
+        const maxOrder =
+          state.radarCharts.length > 0
+            ? Math.max(...state.radarCharts.map((c) => c.order))
+            : -1
+
+        // 深拷贝雷达图，生成新的 ID
+        const newChart: RadarChart = {
+          ...sourceChart,
+          id: newId,
+          name: `${sourceChart.name} (Copy)`,
+          order: maxOrder + 1,
+          createdAt: now,
+          updatedAt: now,
+          // 深拷贝 vendors 和 dimensions
+          vendors: sourceChart.vendors.map((v) => ({ ...v, id: nanoid() })),
+          dimensions: sourceChart.dimensions.map((d) => {
+            const newDimId = nanoid()
+            // 更新 scores 中的 vendorId 映射
+            const vendorIdMap = new Map<string, string>()
+            sourceChart.vendors.forEach((oldV, idx) => {
+              vendorIdMap.set(oldV.id, newChart.vendors[idx].id)
+            })
+
+            const newScores: Record<string, number> = {}
+            Object.entries(d.scores).forEach(([oldVendorId, score]) => {
+              const newVendorId = vendorIdMap.get(oldVendorId)
+              if (newVendorId) {
+                newScores[newVendorId] = score
+              }
+            })
+
+            return {
+              ...d,
+              id: newDimId,
+              scores: newScores,
+              subDimensions: d.subDimensions?.map((sub) => {
+                const newSubScores: Record<string, number> = {}
+                Object.entries(sub.scores).forEach(([oldVendorId, score]) => {
+                  const newVendorId = vendorIdMap.get(oldVendorId)
+                  if (newVendorId) {
+                    newSubScores[newVendorId] = score
+                  }
+                })
+                return {
+                  ...sub,
+                  id: nanoid(),
+                  scores: newSubScores,
+                }
+              }),
+            }
+          }),
+        }
+
+        set((state) => {
+          state.radarCharts.push(newChart)
+        })
+
+        return newId
       },
 
       // ============ Vendor Actions ============
@@ -458,6 +560,17 @@ export const useRadarStore = create<RadarStore>()(
               await import('@/services/storage/radarService')
             await saveRadarChart(sampleChart)
           }
+
+          // 数据迁移：为旧数据添加 order 字段
+          charts = charts.map((chart, index) => {
+            if (chart.order === undefined) {
+              return { ...chart, order: index }
+            }
+            return chart
+          })
+
+          // 按 order 排序
+          charts.sort((a: RadarChart, b: RadarChart) => a.order - b.order)
 
           // 加载激活的雷达图 ID
           let activeChartId = (await getAppSettings('activeChartId')) as

@@ -4,10 +4,11 @@ import { useTranslation } from 'react-i18next'
 import { AppLayout } from '@/components/layout/AppLayout'
 import { useRadarStore } from '@/store'
 import { RadarChart } from '@/components/charts/RadarChart'
-import { ChartToolbar } from '@/components/charts/ChartToolbar'
-import { VendorEditor } from '@/components/editors/VendorEditor'
-import { DimensionEditor } from '@/components/editors/DimensionEditor'
-import { ScoreEditor } from '@/components/editors/ScoreEditor'
+import { RadarTabBar } from '@/components/radar/RadarTabBar'
+import { VendorManager } from '@/components/vendors/VendorManager'
+import { DimensionTable } from '@/components/dimensions/DimensionTable'
+import { ScoreBoard } from '@/components/scoreboard/ScoreBoard'
+import { Separator } from '@/components/ui/separator'
 
 function App() {
   const { t } = useTranslation()
@@ -26,7 +27,7 @@ function App() {
             <div className="text-center">
               <div className="mb-4 inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-blue-600 border-r-transparent" />
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                加载数据中...
+                {t('common.loading')}
               </p>
             </div>
           </div>
@@ -38,37 +39,35 @@ function App() {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <AppLayout>
-        <div className="container mx-auto p-6">
-          {/* 页面标题 */}
-          <div className="mb-6">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-50">
-              {t('app.title')}
-            </h1>
-            <p className="mt-2 text-gray-600 dark:text-gray-400">
-              v0.3.0 - 雷达图可视化 MVP
-            </p>
+        <div className="flex h-[calc(100vh-4rem)] flex-col">
+          {/* 雷达图 Tab 导航栏 */}
+          <div className="flex-shrink-0 px-6 pt-4">
+            <RadarTabBar />
           </div>
+
+          <Separator />
 
           {/* 主要内容区域 */}
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-            {/* 左侧：雷达图 */}
-            <div className="lg:col-span-2">
-              <div className="space-y-4">
-                <ChartToolbar />
-                <RadarChart height={600} />
+          <div className="flex-1 overflow-y-auto">
+            <div className="container mx-auto p-6">
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-4">
+                {/* 左侧：雷达图 */}
+                <div className="lg:col-span-3">
+                  <RadarChart height={600} />
+                </div>
+
+                {/* 右侧：竞品管理和排名 */}
+                <div className="space-y-6">
+                  <VendorManager />
+                  <ScoreBoard />
+                </div>
+              </div>
+
+              {/* 底部：维度管理表格 */}
+              <div className="mt-6">
+                <DimensionTable />
               </div>
             </div>
-
-            {/* 右侧：编辑器 */}
-            <div className="space-y-6">
-              <VendorEditor />
-              <DimensionEditor />
-            </div>
-          </div>
-
-          {/* 底部：分数编辑器 */}
-          <div className="mt-6">
-            <ScoreEditor />
           </div>
         </div>
       </AppLayout>

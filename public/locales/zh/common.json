@@ -2,7 +2,7 @@
   "app": {
     "title": "Radar Bench",
     "subtitle": "竞品能力对比可视化工具",
-    "version": "v0.3.0 - 雷达图可视化 MVP"
+    "version": "v0.4.0 - 完整数据管理"
   },
   "header": {
     "title": "Radar Bench"
@@ -14,7 +14,11 @@
     "delete": "删除",
     "edit": "编辑",
     "add": "添加",
-    "confirm": "确认"
+    "confirm": "确认",
+    "create": "创建",
+    "creating": "创建中...",
+    "actions": "操作",
+    "more": "更多"
   },
   "theme": {
     "light": "浅色模式",
@@ -60,5 +64,60 @@
     "noVendor": "请先添加竞品",
     "noDimension": "请先添加维度",
     "noChart": "请先创建雷达图"
+  },
+  "radar": {
+    "create": "新建雷达图",
+    "createTitle": "创建雷达图",
+    "createDescription": "请输入雷达图名称",
+    "rename": "重命名",
+    "renameTitle": "重命名雷达图",
+    "renameDescription": "请输入新的雷达图名称",
+    "duplicate": "复制",
+    "delete": "删除",
+    "deleteTitle": "删除雷达图",
+    "deleteDescription": "确定要删除这个雷达图吗？此操作无法撤销。",
+    "name": "名称",
+    "namePlaceholder": "请输入雷达图名称",
+    "noCharts": "暂无雷达图",
+    "noActiveChart": "无激活的雷达图"
+  },
+  "vendors": {
+    "title": "竞品管理",
+    "add": "添加竞品",
+    "addFirst": "添加第一个竞品",
+    "newVendor": "竞品 {{number}}",
+    "empty": "暂无竞品。请添加第一个竞品开始使用。",
+    "noActiveChart": "无激活的雷达图",
+    "namePlaceholder": "请输入竞品名称",
+    "symbols": {
+      "circle": "圆形",
+      "rect": "方形",
+      "triangle": "三角形",
+      "diamond": "菱形"
+    }
+  },
+  "dimensions": {
+    "title": "维度管理",
+    "add": "添加维度",
+    "addFirst": "添加第一个维度",
+    "newDimension": "维度 {{number}}",
+    "newSubDimension": "子维度 {{number}}",
+    "empty": "暂无维度。请添加第一个维度开始使用。",
+    "noActiveChart": "无激活的雷达图",
+    "name": "维度名称",
+    "weight": "权重 (%)",
+    "autoCalculated": "分数由子维度自动计算",
+    "addSubDimension": "添加子维度"
+  },
+  "validation": {
+    "weightValid": "✓ 权重总和为 100%",
+    "weightInvalid": "⚠ 权重总和为 {{total}}%，必须为 100%",
+    "subWeightValid": "✓ 子维度权重总和为 100%"
+  },
+  "scoreBoard": {
+    "title": "综合排名",
+    "description": "基于加权总分的竞品排名",
+    "noActiveChart": "无激活的雷达图",
+    "noData": "请添加竞品和维度以查看排名"
   }
 }

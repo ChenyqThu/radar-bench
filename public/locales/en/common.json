@@ -2,7 +2,7 @@
   "app": {
     "title": "Radar Bench",
     "subtitle": "Competitive Analysis Visualization Tool",
-    "version": "v0.3.0 - Radar Visualization MVP"
+    "version": "v0.4.0 - Complete Data Management"
   },
   "header": {
     "title": "Radar Bench"
@@ -14,7 +14,11 @@
     "delete": "Delete",
     "edit": "Edit",
     "add": "Add",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+    "create": "Create",
+    "creating": "Creating...",
+    "actions": "Actions",
+    "more": "More"
   },
   "theme": {
     "light": "Light",
@@ -60,5 +64,60 @@
     "noVendor": "Please add vendors first",
     "noDimension": "Please add dimensions first",
     "noChart": "Please create a radar chart first"
+  },
+  "radar": {
+    "create": "New Radar",
+    "createTitle": "Create Radar Chart",
+    "createDescription": "Enter a name for your new radar chart",
+    "rename": "Rename",
+    "renameTitle": "Rename Radar Chart",
+    "renameDescription": "Enter a new name for this radar chart",
+    "duplicate": "Duplicate",
+    "delete": "Delete",
+    "deleteTitle": "Delete Radar Chart",
+    "deleteDescription": "Are you sure you want to delete this radar chart? This action cannot be undone.",
+    "name": "Name",
+    "namePlaceholder": "Enter radar chart name",
+    "noCharts": "No radar charts yet",
+    "noActiveChart": "No active radar chart"
+  },
+  "vendors": {
+    "title": "Vendor Management",
+    "add": "Add Vendor",
+    "addFirst": "Add First Vendor",
+    "newVendor": "Vendor {{number}}",
+    "empty": "No vendors yet. Add your first vendor to get started.",
+    "noActiveChart": "No active radar chart",
+    "namePlaceholder": "Enter vendor name",
+    "symbols": {
+      "circle": "Circle",
+      "rect": "Rectangle",
+      "triangle": "Triangle",
+      "diamond": "Diamond"
+    }
+  },
+  "dimensions": {
+    "title": "Dimension Management",
+    "add": "Add Dimension",
+    "addFirst": "Add First Dimension",
+    "newDimension": "Dimension {{number}}",
+    "newSubDimension": "Sub-dimension {{number}}",
+    "empty": "No dimensions yet. Add your first dimension to get started.",
+    "noActiveChart": "No active radar chart",
+    "name": "Dimension Name",
+    "weight": "Weight (%)",
+    "autoCalculated": "Score is automatically calculated from sub-dimensions",
+    "addSubDimension": "Add Sub-dimension"
+  },
+  "validation": {
+    "weightValid": "✓ Weights sum to 100%",
+    "weightInvalid": "⚠ Weights sum to {{total}}%, must be 100%",
+    "subWeightValid": "✓ Sub-dimension weights sum to 100%"
+  },
+  "scoreBoard": {
+    "title": "Rankings",
+    "description": "Weighted total scores and rankings",
+    "noActiveChart": "No active radar chart",
+    "noData": "Add vendors and dimensions to see rankings"
   }
 }

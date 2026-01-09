@@ -128,6 +128,7 @@ export function generateSampleRadarChart(): RadarChart {
   return {
     id: nanoid(),
     name: 'Sample Radar Chart',
+    order: 0,
     createdAt: now,
     updatedAt: now,
     vendors,
