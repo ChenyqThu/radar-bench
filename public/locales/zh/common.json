@@ -1,0 +1,27 @@
+{
+  "app": {
+    "title": "Radar Bench",
+    "subtitle": "竞品能力对比可视化工具"
+  },
+  "header": {
+    "title": "Radar Bench"
+  },
+  "common": {
+    "loading": "加载中...",
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "edit": "编辑",
+    "add": "添加",
+    "confirm": "确认"
+  },
+  "theme": {
+    "light": "浅色模式",
+    "dark": "深色模式",
+    "system": "跟随系统"
+  },
+  "language": {
+    "zh": "中文",
+    "en": "English"
+  }
+}

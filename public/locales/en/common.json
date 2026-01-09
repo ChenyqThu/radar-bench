@@ -1,0 +1,27 @@
+{
+  "app": {
+    "title": "Radar Bench",
+    "subtitle": "Competitive Analysis Visualization Tool"
+  },
+  "header": {
+    "title": "Radar Bench"
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "confirm": "Confirm"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "language": {
+    "zh": "中文",
+    "en": "English"
+  }
+}
