@@ -1,7 +1,8 @@
 {
   "app": {
     "title": "Radar Bench",
-    "subtitle": "Competitive Analysis Visualization Tool"
+    "subtitle": "Competitive Analysis Visualization Tool",
+    "version": "v0.3.0 - Radar Visualization MVP"
   },
   "header": {
     "title": "Radar Bench"
@@ -23,5 +24,41 @@
   "language": {
     "zh": "中文",
     "en": "English"
+  },
+  "chart": {
+    "toolbar": {
+      "fullscreen": "Fullscreen",
+      "exitFullscreen": "Exit Fullscreen",
+      "export": "Export",
+      "legendTip": "Tip: Click legend to show/hide series"
+    },
+    "noData": "No radar chart data",
+    "noDataDesc": "Please create a radar chart first",
+    "invalidData": "Invalid data format",
+    "invalidDataDesc": "Please ensure at least one dimension and one vendor with valid scores"
+  },
+  "vendor": {
+    "title": "Vendor Management",
+    "noVendor": "No vendors, please add",
+    "newVendor": "New vendor name",
+    "deleteConfirm": "Are you sure to delete this vendor? All related score data will also be deleted.",
+    "colorPicker": "Choose color"
+  },
+  "dimension": {
+    "title": "Dimension Management",
+    "noDimension": "No dimensions, please add",
+    "newDimension": "New dimension name",
+    "deleteConfirm": "Are you sure to delete this dimension? All related score data will also be deleted.",
+    "weightSum": "Weight Sum",
+    "weightValid": "Weight sum must equal 100%"
+  },
+  "score": {
+    "title": "Score Editor",
+    "range": "Score range: 0-10",
+    "dimensionColumn": "Dimension",
+    "totalScore": "Weighted Total Score",
+    "noVendor": "Please add vendors first",
+    "noDimension": "Please add dimensions first",
+    "noChart": "Please create a radar chart first"
   }
 }

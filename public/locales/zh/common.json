@@ -1,7 +1,8 @@
 {
   "app": {
     "title": "Radar Bench",
-    "subtitle": "竞品能力对比可视化工具"
+    "subtitle": "竞品能力对比可视化工具",
+    "version": "v0.3.0 - 雷达图可视化 MVP"
   },
   "header": {
     "title": "Radar Bench"
@@ -23,5 +24,41 @@
   "language": {
     "zh": "中文",
     "en": "English"
+  },
+  "chart": {
+    "toolbar": {
+      "fullscreen": "全屏",
+      "exitFullscreen": "退出全屏",
+      "export": "导出",
+      "legendTip": "提示: 点击图例可显示/隐藏系列"
+    },
+    "noData": "暂无雷达图数据",
+    "noDataDesc": "请先创建一个雷达图",
+    "invalidData": "数据格式错误",
+    "invalidDataDesc": "请确保至少有一个维度和一个竞品，并且有有效的分数数据"
+  },
+  "vendor": {
+    "title": "竞品管理",
+    "noVendor": "暂无竞品，请添加",
+    "newVendor": "新竞品名称",
+    "deleteConfirm": "确定要删除这个竞品吗？相关的所有分数数据也将被删除。",
+    "colorPicker": "选择颜色"
+  },
+  "dimension": {
+    "title": "维度管理",
+    "noDimension": "暂无维度，请添加",
+    "newDimension": "新维度名称",
+    "deleteConfirm": "确定要删除这个维度吗？相关的所有分数数据也将被删除。",
+    "weightSum": "权重总和",
+    "weightValid": "权重总和必须等于 100%"
+  },
+  "score": {
+    "title": "分数编辑",
+    "range": "分数范围: 0-10",
+    "dimensionColumn": "维度",
+    "totalScore": "加权总分",
+    "noVendor": "请先添加竞品",
+    "noDimension": "请先添加维度",
+    "noChart": "请先创建雷达图"
   }
 }
